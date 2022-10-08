@@ -1,0 +1,21 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+env: 
+  global:
+    - SHA=$(git rev-parse HEAD)
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+script:
+  - docker build -t sriraj14/simplepython:latest -t sriraj14/simplepython:$SHA -f ./Dockerfile 
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on: 
+    branch: main
+
