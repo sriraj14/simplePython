@@ -11,7 +11,7 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - docker build -t sriraj14/simplepython:latest -t sriraj14/simplepython:$SHA -f ./Dockerfile 
+  - docker build -t sriraj14/simplepython:latest -t sriraj14/simplepython:$SHA .
 
 deploy:
   provider: script
